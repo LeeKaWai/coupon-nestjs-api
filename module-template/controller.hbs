@@ -1,0 +1,54 @@
+import {
+  Get,
+  Put,
+  Body,
+  Post,
+  Patch,
+  Param,
+  Query,
+  Delete,
+  Controller,
+  UseFilters
+} from '@nestjs/common';
+// services
+import { {{properCase name}}Service } from './{{camelCase name}}.service';
+
+// models
+import {
+{{properCase name}}CreateModel,
+{{properCase name}}UpdateModel,
+{{properCase name}}SearchModel
+} from './models';
+
+@Controller('{{dashCase name}}s')
+export class {{properCase name}}Controller {
+  constructor(private readonly {{camelCase name}}Service: {{properCase name}}Service) {
+  }
+
+  @Post()
+  public async create(@Body() body: {{properCase name}}CreateModel) {
+    return this.{{camelCase name}}Service.create(body);
+  }
+
+  @Put(':_id')
+  public async update(@Param() param,@Body() body: {{properCase name}}UpdateModel
+  ) {
+    return this.{{camelCase name}}Service.update(param._id, body);
+  }
+
+  @Get()
+  public async find(@Query() query: {{properCase name}}SearchModel) {
+    return this.{{camelCase name}}Service.find(query);
+  }
+
+  @Get(':_id')
+  public async findById(@Param() param, @Query() query?) {
+    const result = await this.{{camelCase name}}Service.findById(param._id);
+    return result;
+  }
+
+  @Delete(':_id')
+  public async delete(@Param() param) {
+    return this.{{camelCase name}}Service.delete(param._id);
+  }
+}

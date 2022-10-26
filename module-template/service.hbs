@@ -1,0 +1,44 @@
+import {Injectable, Scope, Inject} from '@nestjs/common';
+import {InjectModel} from '@nestjs/mongoose';
+import { Model } from 'mongoose';
+
+// interfaces & models
+import {
+  {{properCase name}}CreateModel,
+  {{properCase name}}UpdateModel,
+  {{properCase name}}SearchModel
+} from './models';
+import { I{{properCase name}} } from './interfaces';
+
+@Injectable({scope: Scope.REQUEST})
+export class {{properCase name}}Service {
+  constructor(
+    @InjectModel('{{properCase name}}s') private readonly {{camelCase name}}Repository: Model<I{{properCase name}}>
+  ) {}
+
+  public _castQuery(searchModel: {{properCase name}}SearchModel) {
+    const query: any = {};
+    const {} = searchModel;
+    return query;
+  }
+
+  public async create(body: {{properCase name}}CreateModel) {
+    return this.{{camelCase name}}Repository.create(body);
+  }
+
+  public async find(query: {{properCase name}}SearchModel) {
+    return this.{{camelCase name}}Repository.find(query)
+  }
+
+  public async findById(id){
+    return this.{{camelCase name}}Repository.findById(id);
+  }
+
+  public async update(_id, newBody:{{properCase name}}UpdateModel) {
+    return this.{{camelCase name}}Repository.findByIdAndUpdate(_id, newBody, { new: true });
+  }
+
+  public async delete(_id){
+    return this.{{camelCase name}}Repository.findByIdAndDelete(_id);
+  }
+}

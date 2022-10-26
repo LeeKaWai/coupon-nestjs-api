@@ -1,0 +1,14 @@
+import {
+  IsString,
+  IsBoolean,
+  IsNotEmpty,
+  IsEmpty,
+  IsOptional,
+  ValidateNested
+} from 'class-validator';
+
+
+export class {{properCase name}}CreateModel {
+  @IsEmpty()
+  workspace?: string;
+}

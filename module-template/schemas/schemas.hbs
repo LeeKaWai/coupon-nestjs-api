@@ -1,0 +1,12 @@
+import {Schema as MongooseSchema, SchemaTypes} from 'mongoose';
+
+export const CollectionName = '{{properCase name}}s';
+export const Schema = new MongooseSchema(
+  {
+    workspaceId: { type: SchemaTypes.ObjectId, ref: 'Workspaces', required: true }
+  },
+  {
+    collection: CollectionName,
+    timestamps: true
+  }
+);
